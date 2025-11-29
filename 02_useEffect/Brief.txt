@@ -1,0 +1,45 @@
+Some examples of side effects are:
+- Fetching data from API
+- Directly updating the DOM
+- Timers like SetTimeOut and Setlnterval
+
+useEffect runs each time when any of the component on the page re-renders if no empty dependecies i.e., [] or dependency array with values is provided.
+
+The useEffect hook is used to perform side effects in functional components. Side effects are operations that can affect something outside the component or require asynchronous actions, such as fetching data, interacting with APIs, or manipulating the DOM.
+
+The callback function is executed after the render.
+The cleanup function (returned from the useEffect function) runs when the component unmounts or when the dependency values change.
+The dependency array determines when the useEffect is triggered. If it's empty ([]), the effect runs only once (on mount). If it's populated with values, it re-runs whenever those values change.
+Applications of useEffect:
+Fetching Data:
+
+useEffect is often used to perform API calls or fetch data from external sources when the component mounts.
+Example: Fetching a list of users from an API and displaying them.
+Subscribing to External Data Sources:
+
+If your app needs to listen to external sources (e.g., WebSockets, third-party APIs, or a global state), useEffect is used to subscribe and unsubscribe from those data sources.
+Example: Subscribing to a WebSocket stream to display live data.
+DOM Manipulation:
+
+It can be used to perform direct DOM manipulations that aren’t directly related to React’s rendering process (e.g., focusing an input, animations, etc.).
+Example: Automatically focusing on the first input element when the component mounts.
+Setting Up and Cleaning Up Timers/Intervals:
+
+You can use useEffect to set up a timer or an interval and clean it up when the component unmounts or when certain conditions change.
+Example: Setting a countdown timer, or using setInterval to update a component at regular intervals.
+Event Listeners:
+
+Use useEffect to add event listeners (like resize, scroll, or custom events) and remove them when the component unmounts.
+Example: Handling window resize events to update layout or size of elements.
+Triggering Actions on State Changes:
+
+useEffect can be used to trigger actions when specific state variables change.
+Example: Updating the page title when a state variable changes, or sending analytics events.
+Local Storage and Session Storage:
+
+It can interact with the browser’s local storage or session storage to persist user data across sessions.
+Example: Saving user preferences (theme, language) to local storage and retrieving them on component mount.
+Component Cleanup:
+
+When using subscriptions, event listeners, or intervals, it's important to clean up to avoid memory leaks. useEffect allows you to clean up side effects when the component is unmounted or the dependency array changes.
+Example: Clearing an interval when the component unmounts.

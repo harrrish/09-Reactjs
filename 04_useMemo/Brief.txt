@@ -1,0 +1,14 @@
+useMemo is a React Hook that allows you to memoize (or "remember") the result of a calculation and recompute it only when certain dependencies have changed. 
+This is useful for optimizing performance, especially in cases where a component re-renders frequently and performs expensive calculations.
+
+The React useMemo Hook returns a memoized value. (it's like caching a value so that it doesn't need to be recalculated.)
+
+This can improve the performance of the application. There is one more hook in react to improve performance, that is useCalIback hook.
+
+The useMemo and useCallback Hooks are similar. The main difference is:
+- useMemo returns a memoized VALUE.
+- useCallback returns a memoized FUNCTION.
+
+When to Use useMemo:
+    When you have a complex calculation that you don’t want to repeat on every render.
+    When you are passing an object or array as a prop to child components, and the child component is doing unnecessary re-renders because the reference of the object or array is changing on every render (even though its content may not change).

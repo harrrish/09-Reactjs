@@ -1,0 +1,42 @@
+useLayoutEffect vs useEffect
+Both useLayoutEffect and useEffect are hooks in React that allow you to perform side effects in your components, but they differ in when they run during the component's lifecycle and in their use cases.
+
+useEffect
+  When it runs: useEffect runs after the DOM has been painted to the screen. 
+    This means that any changes to the DOM or component state made inside the effect will cause React to re-render.
+  Use cases: useEffect is best for side effects that do not affect the layout or visuals immediately, such as:
+    Fetching data from APIs.
+    Subscribing to an event.
+    Setting up timers or intervals.
+    Updating state or props based on changes in dependencies.
+    
+When it runs: useLayoutEffect runs synchronously after all DOM mutations but before the browser has painted the updates to the screen. 
+This means it runs immediately after DOM changes but before the browser repaints. 
+This can be useful when you need to measure or manipulate DOM elements before the user sees any updates (i.e., avoiding visual flickering).
+  Use cases: useLayoutEffect is best used when:
+    You need to read or write layout information (e.g., measurements or positions of elements).
+    You need to synchronously apply DOM manipulations to avoid a visual flicker when React updates the DOM.
+    Adjusting scroll positions or animations based on DOM elements.
+ 
+When to Use useLayoutEffect vs useEffect
+Use useEffect when you are not concerned with blocking visual updates and the effect doesn’t need to measure or adjust layout properties. 
+For example, fetching data, logging, or setting up an event listener.
+
+Use useLayoutEffect when you need to read and modify the DOM layout (e.g., measuring elements or applying styles that affect the layout), and you want to prevent flickering by ensuring those changes are applied before the screen updates.
+
+Disadvantages of useLayoutEffect
+Performance: useLayoutEffect runs synchronously after all DOM mutations, which can lead to performance issues, especially if used in large applications. 
+It can block the browser from painting the screen until it completes, which could result in layout thrashing and a janky user experience (flickers or delays in rendering).
+
+In contrast, useEffect runs asynchronously, meaning React batches DOM updates and doesn’t block the paint process, which leads to smoother updates.
+
+Overuse: It can be tempting to overuse useLayoutEffect because it runs earlier, but it should be used sparingly. 
+Overusing it can hurt the performance of your application, as it forces React to handle layout and rendering synchronously.
+
+Cross-platform concerns: useLayoutEffect can have platform-specific behaviors that might not be ideal in all cases. 
+For example, on server-side rendering (SSR), it doesn't work as expected because the DOM doesn't exist on the server. 
+In these cases, React uses useEffect as a fallback.
+
+Summary
+useEffect is preferred for most side effects as it doesn't block the paint and allows the browser to render updates smoothly.
+useLayoutEffect is ideal for when you need to measure the layout or trigger DOM changes that should be reflected before the browser repaints the screen.

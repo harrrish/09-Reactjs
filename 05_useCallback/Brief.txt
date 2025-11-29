@@ -1,0 +1,22 @@
+useCallback is a React Hook that lets you cache a function definition between re—renders.
+  It means, when we use the useCallback Hook, it doesn't create multiple instance of same function when re-render happens.
+  
+Instead of creating new instance of the function, it provides the cached function on re-render of the component.
+
+React.memo:
+React.memo is a higher-order component (HOC) in React that prevents unnecessary re-renders of a child component if its props haven't changed. 
+It optimizes performance by ensuring that a child component only re-renders when its props change, even if the parent component re-renders due to its state or props updating.
+
+In the case of your example, if newFn is passed as a prop to the UseCallbackChild component and doesn't change, wrapping the UseCallbackChild component with React.memo ensures it will not re-render unnecessarily when the parent component (UseCallback) re-renders. 
+This is particularly useful when the child component is large or has expensive rendering operations.
+
+useCallback:
+useCallback is a hook in React that returns a memoized version of a function, which only changes when one of its dependencies changes.
+It helps avoid the creation of new function instances on each render. 
+When you pass a function as a prop to a child component, and the child component is wrapped in React.memo, useCallback ensures that the function reference doesn't change unless its dependencies change, preventing the child component from re-rendering.
+
+In your example:
+
+newFn is wrapped in useCallback. 
+This ensures that the newFn function reference doesn't change unless its dependencies (in this case, none, because the dependency array [] is empty) change.
+Since newFn doesn't change between renders, React.memo in UseCallbackChild ensures that the child component doesn't re-render unnecessarily when the parent (UseCallback) re-renders due to the state change (setCount).

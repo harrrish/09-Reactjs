@@ -1,0 +1,42 @@
+useContext is a React Hook that allows you access data from any component without explicitly passing it down through props at every level.
+useContext is used to manage Global data in the React App.
+
+Important Notes about useContext
+Context updates trigger re-renders:
+When the value passed to the context provider changes, all components consuming that context (via useContext) will re-render with the new value.
+
+tsx
+Copy code
+const [value, setValue] = useState("initial value");
+
+return (
+  <MyContext.Provider value={value}>
+    <button onClick={() => setValue("new value")}>Change Value</button>
+    <ChildComponent />
+  </MyContext.Provider>
+);
+Whenever the value changes, ChildComponent will re-render to reflect the new context value.
+
+Re-renders occur only for components using useContext:
+useContext doesn't re-render all child components under the provider, only those that are consuming the context.
+
+Context only passes values, not functions:
+You should avoid passing methods or functions to the context directly because it can cause unnecessary re-renders when the function reference changes. 
+You can pass a stable value like a string, number, or object, and you can use useMemo or useCallback to optimize functions passed through context.
+
+When to use useContext vs useReducer:
+useContext is useful for global values or shared state that doesn’t change often, such as user authentication status, theming, etc. 
+For more complex state management with actions and reducers, useReducer is a better option.
+
+When to Use useContext?
+Global State:
+If you have a global state that many components need to access (like theme settings, language preferences, or user authentication), useContext can be very useful.
+
+Avoiding Prop Drilling:
+When you need to pass data down through many levels of nested components (known as prop drilling), useContext helps avoid the need to pass props at every intermediate level.
+
+Theming and Localization:
+Contexts are commonly used for managing things like theming (light/dark mode) or localization (language settings) across an app.
+
+User Authentication State:
+If you have user authentication or user data that needs to be accessed across multiple components, context can be a great way to share this state.
